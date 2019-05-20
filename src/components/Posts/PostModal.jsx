@@ -83,6 +83,7 @@ class PostModal extends Component {
         title: this.state.title,
         body: this.state.body,
         author: this.state.author,
+        timestamp: Date.now(),
         category: this.state.category,
       }, this.props.activeCategory)
     }

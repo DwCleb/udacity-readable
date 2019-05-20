@@ -14,7 +14,7 @@ const CategoriesSideBar = ({ categories, activeCategory, filterCategory }) => (
       All
     </NavItem>
     {categories.map((cat, index) =>
-      <NavItem key={cat.path} eventKey={index} href={`/${cat.path}/`}>
+      <NavItem key={cat.path} eventKey={index} href={`/category/${cat.path}/`}>
         {cat.name}
       </NavItem>
     )}

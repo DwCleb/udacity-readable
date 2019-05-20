@@ -32,7 +32,7 @@ class ListPosts extends Component {
 	}
 
 	redirect() {
-		this.props.history.push('/');
+		this.props.history.push('/404');
 	}
 
 	componentWillMount() {
@@ -48,11 +48,15 @@ class ListPosts extends Component {
 
 
 	openCommentModal() {
-		this.setState({ showCommentModal: true });
+		this.setState({
+			isNewComment: true,
+			showCommentModal: true,
+		});
 	}
 
 	closeCommentModal() {
 		this.setState({ showCommentModal: false });
+		this.editComment(null, false)
 	}
 
 	closeEditModal() {
@@ -101,9 +105,9 @@ class ListPosts extends Component {
 		this.props.deleteComment(comment)
 	}
 
-	editComment = (comment) => {
+	editComment = (comment, open = true) => {
 		this.setState({
-			showCommentModal: true,
+			showCommentModal: open,
 			editableComment: comment
 		});
 	}
@@ -139,7 +143,8 @@ class ListPosts extends Component {
 							vote={(commentId, voteType) => this.props.voteComment(commentId, voteType)} />
 					</Col>
 				</Grid>
-				<CommentModal showCommentModal={this.state.showCommentModal}
+				<CommentModal 
+					showCommentModal={this.state.showCommentModal}
 					closeCommentModal={() => this.closeCommentModal()}
 					comment={this.state.editableComment}
 					post={this.props.post} />

@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const PanelHeaderPost = (post, editPost, deletePost) => {
   return (
       <div>
-        <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
+        <Link to={`/category/${post.category}/${post.id}`}>{post.title}</Link>
         <ButtonToolbar className="pull-right">
           <Button className="pull-right" bsSize="xsmall" bsStyle="danger" onClick={() => deletePost(post.id)}>
             <FaClose/>

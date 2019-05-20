@@ -28,7 +28,7 @@ const CommentListConst = (props) => (
             </Col>
           </Row>
           <Row>
-            <ButtonVote id={comment.id} onClick={props.votePost} />
+            <ButtonVote id={comment.id} onClick={props.vote} />
           </Row>
         </Panel>
       </Row>

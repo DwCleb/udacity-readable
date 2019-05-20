@@ -38,7 +38,6 @@ class CommentModal extends Component {
 
   handleAuthorChange = (event) => {
     this.setState({ author: event.target.value });
-
   }
 
   handleCommentChange = (event) => {
@@ -46,11 +45,12 @@ class CommentModal extends Component {
   }
 
   onEntered = () => {
-    if (this.props.comment !== null && this.props.comment !== undefined) {
+    const { comment } = this.props
+    if (comment !== null && comment !== undefined) {
       this.setState({
-        newComment: false,
-        author: this.props.comment.author,
-        body: this.props.comment.body,
+        newComment: true,
+        author: comment.author,
+        body: comment.body,
       })
     }
 
@@ -65,12 +65,10 @@ class CommentModal extends Component {
         timestamp: Date.now(),
         body: this.state.body,
         author: this.state.author,
-        voteScore: this.props.post.voteScore,
-        deleted: false,
-        parentDeleted: this.props.post.deleted
       })
     }
     else {
+      console.log(this.props)
       this.props.editComment({
         id: this.props.comment.id,
         parentId: this.props.comment.parentId,
@@ -82,19 +80,24 @@ class CommentModal extends Component {
         parentDeleted: this.props.comment.parentDeleted
       })
     }
-    this.props.closeCommentModal()
+    this.onCloseModal()
+  }
+
+  onCloseModal = () => {
     this.setState({
       body: '',
       author: '',
     })
+    this.props.closeCommentModal()
   }
 
   render() {
+    const { comment } = this.props
     return (
-      <Modal show={this.props.showCommentModal} onHide={() => this.props.closeCommentModal()}
+      <Modal show={this.props.showCommentModal} onHide={() => this.onCloseModal()}
         onEntered={this.onEntered}>
         <Modal.Header closeButton>
-          <Modal.Title>Comment</Modal.Title>
+          <Modal.Title>{comment != null ? 'Edit ' : 'New '} Comment </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
@@ -115,7 +118,7 @@ class CommentModal extends Component {
               onChange={this.handleCommentChange}
             />
 
-            <Button type="submit" bsStyle="success"  onClick={this.postComment}>
+            <Button type="submit" bsStyle="success" onClick={this.postComment}>
               Submit
               </Button>
           </form>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Panel, Row } from 'react-bootstrap'
+import { Col, Panel, Row } from 'react-bootstrap'
 import PanelHeaderPost from "./PanelHeaderPost";
 import ButtonVote from "../Buttons/Vote";
 
